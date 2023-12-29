@@ -28,34 +28,37 @@
     </table>
 </fieldset>
 <script>
-function reg() {
-    let user = {
-        acc: $("#acc").val(),
-        pw: $("#pw").val(),
-        pw2: $("#pw2").val(),
-        email: $("#email").val()
-    };
-    // console.log(user);
-    if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
-        if (user.pw == user.pw2) {
-            $.post("./api/chk_acc.php", {
-                acc: user.acc
-            }, (res) => {
-                //測試有沒有得到正確的1或0 
-                console.log(res);
-                if (parseInt(res) == 1) {
-                    alert("帳號重覆")
-                } else {
+    function reg() {
+        let user = {
+            acc: $("#acc").val(),
+            pw: $("#pw").val(),
+            pw2: $("#pw2").val(),
+            email: $("#email").val()
+        };
+        // console.log(user);
+        if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
+            if (user.pw == user.pw2) {
+                $.post("./api/chk_acc.php", {
+                    acc: user.acc
+                }, (res) => {
+                    //測試有沒有得到正確的1或0 
+                    console.log(res);
+                    if (parseInt(res) == 1) {
+                        alert("帳號重覆")
+                    } else {
+                        $.post('./api/reg.php', user, (res) => {
+                            //if(res) 真正實務上，要判斷是否真的已經寫入資料庫，再alert
+                            alert('註冊完成，歡迎加入')
+                        })
+                    }
+                })
 
-                }
-            })
-
+            } else {
+                alert("密碼不一致");
+                return false;
+            }
         } else {
-            alert("密碼不一致");
-            return false;
+            alert("不可空白");
         }
-    } else {
-        alert("不可空白");
     }
-}
 </script>
