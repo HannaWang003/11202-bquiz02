@@ -38,6 +38,17 @@ function reg() {
     // console.log(user);
     if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
         if (user.pw == user.pw2) {
+            $.post("./api/chk_acc.php", {
+                acc: user.acc
+            }, (res) => {
+                //測試有沒有得到正確的1或0 
+                console.log(res);
+                if (parseInt(res) == 1) {
+                    alert("帳號重覆")
+                } else {
+
+                }
+            })
 
         } else {
             alert("密碼不一致");

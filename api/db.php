@@ -120,6 +120,7 @@ class DB
 }
 //資料表
 $Total = new DB('total');
+$User = new DB('user');
 //判斷是否瀏覽過
 if (!isset($_SESSION['visited'])) {
     if ($Total->count(['date' => date("Y-m-d")])) {
