@@ -20,10 +20,21 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" value="註冊">
+                <input type="button" value="註冊" onclick="reg()">
                 <input type="reset" value="清除">
             </td>
             <td></td>
         </tr>
     </table>
 </fieldset>
+<script>
+function reg() {
+    let user = {
+        acc: $("#acc").val(),
+        pw: $("#pw").val(),
+        pw2: $("#pw2").val(),
+        email: $("#email").val()
+    };
+    console.log(user);
+}
+</script>
