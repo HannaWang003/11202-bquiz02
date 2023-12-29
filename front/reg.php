@@ -35,6 +35,16 @@ function reg() {
         pw2: $("#pw2").val(),
         email: $("#email").val()
     };
-    console.log(user);
+    // console.log(user);
+    if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
+        if (user.pw == user.pw2) {
+
+        } else {
+            alert("密碼不一致");
+            return false;
+        }
+    } else {
+        alert("不可空白");
+    }
 }
 </script>
