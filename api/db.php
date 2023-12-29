@@ -118,7 +118,9 @@ class DB
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+//資料表
 $Total = new DB('total');
+//判斷是否瀏覽過
 if (!isset($_SESSION['visited'])) {
     if ($Total->count(['date' => date("Y-m-d")])) {
         $total = $Total->find(['date' => date("Y-m-d")]);
