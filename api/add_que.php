@@ -6,7 +6,9 @@ if (isset($_POST['subject'])) {
 }
 if (isset($_POST['option'])) {
     foreach ($_POST['option'] as $option) {
-        $Que->save(['text' => $option, 'subject_id' => $subject_id, 'vote' => 0]);
+        if (!empty($option)) {
+            $Que->save(['text' => $option, 'subject_id' => $subject_id, 'vote' => 0]);
+        }
     }
 }
 to("../back.php?do=que");
