@@ -10,7 +10,7 @@
         <div>
             <div id="opt">
                 選項
-                <input type="text" name="opotion">
+                <input type="text" name="option[]">
                 <input type="button" value="更多" onclick="more()">
             </div>
         </div>
@@ -21,10 +21,10 @@
     </form>
 </fieldset>
 <script>
-    function more() {
-        let opt = `<div id="opt">選項
-            <input type="text" name="opotion">
+function more() {
+    let opt = `<div id="opt">選項
+            <input type="text" name="option[]">
             </div>`
-        $("#opt").before(opt);
-    }
+    $("#opt").before(opt);
+}
 </script>
