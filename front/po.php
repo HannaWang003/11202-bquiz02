@@ -1,17 +1,17 @@
 <style>
-.type-item {
-    display: block;
-}
+    .type-item {
+        display: block;
+    }
 
-.types,
-.new-items {
-    display: inline-block;
-    vertical-align: top;
-}
+    .types,
+    .new-items {
+        display: inline-block;
+        vertical-align: top;
+    }
 
-.new-items {
-    width: 600px;
-}
+    .new-items {
+        width: 600px;
+    }
 </style>
 <div class="nav">目前位置: 首頁 > 分類網誌 > <span class="type">健康新知</span></div>
 <fieldset class="types">
@@ -23,33 +23,37 @@
 </fieldset>
 <fieldset class="new-items">
     <legend>文章列表</legend>
-    <div class="list-items"></div>
+    <div class="list-items" style="display:none"></div>
     <div class="article"></div>
 </fieldset>
 
 <script>
-getList(1);
-$(".type-item").on('click', function() {
-    $('.type').text($(this).text());
-    let type = $(this).data('id');
-    getList(type);
-})
-
-function getList(type) {
-    $.get("./api/get_list.php", {
-        type
-    }, (list) => {
-
-        $(".list-items").html(list);
+    getList(1);
+    $(".type-item").on('click', function() {
+        $('.type').text($(this).text());
+        let type = $(this).data('id');
+        getList(type);
     })
-}
 
-function getNews(id) {
-    $.get("./api/get_news.php", {
-        id
-    }, (news) => {
-        $(".article").html(`<pre>${news}            
-            </pre>`);
-    })
-}
+    function getList(type) {
+        $.get("./api/get_list.php", {
+            type
+        }, (list) => {
+
+            $(".list-items").html(list);
+            $(".article,.list-items").toggle();
+            // $(".list-items").show();
+        })
+    }
+
+    function getNews(id) {
+        $.get("./api/get_news.php", {
+            id
+        }, (news) => {
+            $(".article").html(news);
+            $(".article,.list-items").toggle();
+            // $(".list-items").hide();
+            // $(".article").show();
+        })
+    }
 </script>
