@@ -2,7 +2,7 @@
     <legend>帳號管理</legend>
     <section>
         <form action="./api/edit_user.php" method="post">
-            <table class='ct' style="width:80%">
+            <table class='ct' style="width:80%" id="showAcc">
                 <tr style="background:#ccc">
                     <td>帳號</td>
                     <td>密碼</td>
@@ -13,11 +13,11 @@
                 foreach ($rows as $row) {
                     if ($row['acc'] != 'admin') {
                 ?>
-                        <tr>
-                            <td><?= $row['acc'] ?></td>
-                            <td><?= str_repeat("*", mb_strlen($row['pw'])) ?></td>
-                            <td><input type="checkbox" name="del[]" value=<?= $row['id'] ?>></td>
-                        </tr>
+                <tr>
+                    <td><?= $row['acc'] ?></td>
+                    <td><?= str_repeat("*", mb_strlen($row['pw'])) ?></td>
+                    <td><input type="checkbox" name="del[]" value=<?= $row['id'] ?>></td>
+                </tr>
 
                 <?php
                     }
@@ -63,46 +63,56 @@
     </table>
 </fieldset>
 <script>
-    $.get("./api/member.php",
-        function(result) {
-            // let arrays = JSON.parse(result);
-            result.forEach((val, idx) => {
-                console.log(val.acc);
+// $.get("./api/member.php",
+//     function(result) {
+//         // let arrays = JSON.parse(result);
+//         result.forEach((val, idx) => {
+//             console.log(val.acc);
+//         })
+//     }
+// );
+
+
+function reg() {
+    let user = {
+        acc: $("#acc").val(),
+        pw: $("#pw").val(),
+        pw2: $("#pw2").val(),
+        email: $("#email").val()
+    };
+    // console.log(user);
+    if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
+        if (user.pw == user.pw2) {
+            $.post("./api/chk_acc.php", {
+                acc: user.acc
+            }, (res) => {
+                //測試有沒有得到正確的1或0 
+                console.log(res);
+                if (parseInt(res) == 1) {
+                    alert("帳號重覆")
+                } else {
+                    $.post('./api/reg.php', user, (res) => {
+                        location.reload();
+                        //下述用ajax顯示新增的內容
+                        //             console.log(res);
+                        //             $('#showAcc').append(`
+                        //             <tr>
+                        //     <td>${res.acc}</td>
+                        //     <td>${res.pw}</td>
+                        //     <td><input type="checkbox" name="del[]" value=${res.id}></td>
+                        // </tr>
+                        //             `)
+
+                    })
+                }
             })
-        }
-    );
 
-
-    function reg() {
-        let user = {
-            acc: $("#acc").val(),
-            pw: $("#pw").val(),
-            pw2: $("#pw2").val(),
-            email: $("#email").val()
-        };
-        // console.log(user);
-        if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
-            if (user.pw == user.pw2) {
-                $.post("./api/chk_acc.php", {
-                    acc: user.acc
-                }, (res) => {
-                    //測試有沒有得到正確的1或0 
-                    console.log(res);
-                    if (parseInt(res) == 1) {
-                        alert("帳號重覆")
-                    } else {
-                        $.post('./api/reg.php', user, (res) => {
-                            location.reload();
-                        })
-                    }
-                })
-
-            } else {
-                alert("密碼不一致");
-                return false;
-            }
         } else {
-            alert("不可空白");
+            alert("密碼不一致");
+            return false;
         }
+    } else {
+        alert("不可空白");
     }
+}
 </script>
