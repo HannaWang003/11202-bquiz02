@@ -13,11 +13,11 @@
                 foreach ($rows as $row) {
                     if ($row['acc'] != 'admin') {
                 ?>
-                        <tr>
-                            <td><?= $row['acc'] ?></td>
-                            <td><?= str_repeat("*", mb_strlen($row['pw'])) ?></td>
-                            <td><input type="checkbox" name="del[]" value=<?= $row['id'] ?>></td>
-                        </tr>
+                <tr>
+                    <td><?= $row['acc'] ?></td>
+                    <td><?= str_repeat("*", mb_strlen($row['pw'])) ?></td>
+                    <td><input type="checkbox" name="del[]" value=<?= $row['id'] ?>></td>
+                </tr>
 
                 <?php
                     }
@@ -63,45 +63,46 @@
     </table>
 </fieldset>
 <script>
-    $.get('./api/member.php', (arrays) => {
-        console.log(arrays);
-        arrays.each((array, idx) => {
-            console.log(1)
+$.get("./api/member.php",
+    function(result) {
+        let arrays = JSON.parse(result);
+        arrays.forEach((val, idx) => {
+            console.log(val.acc);
         })
-
-    });
-
-
-    function reg() {
-        let user = {
-            acc: $("#acc").val(),
-            pw: $("#pw").val(),
-            pw2: $("#pw2").val(),
-            email: $("#email").val()
-        };
-        // console.log(user);
-        if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
-            if (user.pw == user.pw2) {
-                $.post("./api/chk_acc.php", {
-                    acc: user.acc
-                }, (res) => {
-                    //測試有沒有得到正確的1或0 
-                    console.log(res);
-                    if (parseInt(res) == 1) {
-                        alert("帳號重覆")
-                    } else {
-                        $.post('./api/reg.php', user, (res) => {
-                            location.reload();
-                        })
-                    }
-                })
-
-            } else {
-                alert("密碼不一致");
-                return false;
-            }
-        } else {
-            alert("不可空白");
-        }
     }
+);
+
+
+function reg() {
+    let user = {
+        acc: $("#acc").val(),
+        pw: $("#pw").val(),
+        pw2: $("#pw2").val(),
+        email: $("#email").val()
+    };
+    // console.log(user);
+    if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
+        if (user.pw == user.pw2) {
+            $.post("./api/chk_acc.php", {
+                acc: user.acc
+            }, (res) => {
+                //測試有沒有得到正確的1或0 
+                console.log(res);
+                if (parseInt(res) == 1) {
+                    alert("帳號重覆")
+                } else {
+                    $.post('./api/reg.php', user, (res) => {
+                        location.reload();
+                    })
+                }
+            })
+
+        } else {
+            alert("密碼不一致");
+            return false;
+        }
+    } else {
+        alert("不可空白");
+    }
+}
 </script>
