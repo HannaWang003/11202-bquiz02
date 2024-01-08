@@ -17,27 +17,40 @@
         $rows = $News->all(['sh' => 1], "limit $start,$size ");
         foreach ($rows as $row) {
         ?>
-            <tr>
-                <td><?= $row['title'] ?></td>
-                <td><?= mb_substr($row['news'], 0, 25) ?>...</td>
-                <td></td>
-            </tr>
+        <tr>
+            <td>
+                <div class='title' data-id="<?= $row['id']; ?>" style="cursor:pointer;">
+                    <?= $row['title'] ?></div>
+            </td>
+            <td>
+                <div id="s<?= $row['id'] ?>"><?= mb_substr($row['news'], 0, 25) ?>...</div>
+                <div id="a<?= $row['id'] ?>" style="display:none"><?= $row['news'] ?></div>
+            </td>
+            <td></td>
+        </tr>
         <?php
         }
         ?>
     </table>
+    <?php
+    if ($nowpage - 1 > 0) {
+        $prev = $nowpage - 1;
+        echo "<a href='?do=news&page=$prev'> < </a>";
+    }
+    for ($i = 1; $i <= $pages; $i++) {
+        $fontSize = ($i == $nowpage) ? 'font-size:24px' : '';
+        echo "<a href='?do=news&page=$i' style='$fontSize'>$i</a>";
+    }
+    if ($nowpage + 1 <= $pages) {
+        $next = $nowpage + 1;
+        echo "<a href='?do=news&page=$next'> > </a>";
+    }
+    ?>
 </fieldset>
-<?php
-if ($nowpage - 1 > 0) {
-    $prev = $nowpage - 1;
-    echo "<a href='?do=news&page=$prev'> < </a>";
-}
-for ($i = 1; $i <= $pages; $i++) {
-    $fontSize = ($i == $nowpage) ? 'font-size:24px' : '';
-    echo "<a href='?do=news&page=$i' style='$fontSize'>$i</a>";
-}
-if ($nowpage + 1 <= $pages) {
-    $next = $nowpage + 1;
-    echo "<a href='?do=news&page=$next'> > </a>";
-}
-?>
+<script>
+$(".title").on('click', (e) => {
+    let id = $(e.target).data('id')
+    $(`#s${id},#a${id}`).toggle()
+
+})
+</script>

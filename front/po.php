@@ -43,7 +43,7 @@
             $(".list-items").html(list);
             // $(".article,.list-items").toggle();
             $(".list-items").show();
-            $(".article").show();
+            $(".article").hide();
         })
     }
 
