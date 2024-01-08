@@ -1,35 +1,36 @@
 <style>
-.tag {
-    width: 100px;
-    padding: 5px 10px;
-    border: 1px solid black;
-    margin-left: -1px;
-    border-radius: 5px 5px 0 0;
-    /* 縮寫tac */
-    text-align: center;
-    background-color: #ccc;
+    .tag {
+        width: 100px;
+        padding: 5px 10px;
+        border: 1px solid black;
+        margin-left: -1px;
+        border-radius: 5px 5px 0 0;
+        /* 縮寫tac */
+        text-align: center;
+        background-color: #ccc;
+        cursor: pointer;
 
-}
+    }
 
-.tags {
-    display: flex;
-    margin-left: 1px;
+    .tags {
+        display: flex;
+        margin-left: 1px;
 
-}
+    }
 
-article section {
-    border: 1px solid black;
-    border-radius: 0 5px 5px 5px;
-    min-height: 480px;
-    margin-top: -1px;
-    display: none;
-    padding: 15px;
-}
+    article section {
+        border: 1px solid black;
+        border-radius: 0 5px 5px 5px;
+        min-height: 480px;
+        margin-top: -1px;
+        display: none;
+        padding: 15px;
+    }
 
-.active {
-    border-bottom: 1px solid white;
-    background-color: #fff;
-}
+    .active {
+        border-bottom: 1px solid white;
+        background-color: #fff;
+    }
 </style>
 <div class="tags">
     <div id="sec01" class="tag active">健康新知</div>
@@ -137,15 +138,15 @@ article section {
     </section>
 </article>
 <script>
-$('.tag').on('click', function() {
-    $('.tag').removeClass('active');
-    $(this).addClass('active');
-    let id = $(this).attr('id').replace("sec", "section");
-    $("section").hide();
-    $('#' + id).show();
-    // $(this).attr({
-    //     "data-set": "123",
-    //     "data-update": "111"
-    // });
-})
+    $('.tag').on('click', function() {
+        $('.tag').removeClass('active');
+        $(this).addClass('active');
+        let id = $(this).attr('id').replace("sec", "section");
+        $("section").hide();
+        $('#' + id).show();
+        // $(this).attr({
+        //     "data-set": "123",
+        //     "data-update": "111"
+        // });
+    })
 </script>

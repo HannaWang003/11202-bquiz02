@@ -41,8 +41,9 @@
         }, (list) => {
 
             $(".list-items").html(list);
-            $(".article,.list-items").toggle();
-            // $(".list-items").show();
+            // $(".article,.list-items").toggle();
+            $(".list-items").show();
+            $(".article").show();
         })
     }
 
@@ -51,9 +52,9 @@
             id
         }, (news) => {
             $(".article").html(news);
-            $(".article,.list-items").toggle();
-            // $(".list-items").hide();
-            // $(".article").show();
+            // $(".article,.list-items").toggle();
+            $(".list-items").hide();
+            $(".article").show();
         })
     }
 </script>
