@@ -63,12 +63,4 @@
         $(`#s${id},#a${id}`).toggle()
 
     })
-
-    function good(news) {
-        $.post("./api/good.php", {
-            news
-        }, () => {
-            location.reload();
-        })
-    }
 </script>

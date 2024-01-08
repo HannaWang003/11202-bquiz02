@@ -23,3 +23,14 @@ function lo(th, url) {
 // 		}
 // 	})
 // }
+function good(news) {
+  $.post(
+    "./api/good.php",
+    {
+      news,
+    },
+    () => {
+      location.reload();
+    }
+  );
+}
