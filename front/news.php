@@ -6,10 +6,21 @@
             <th width="50%">內容</th>
             <th width=""></th>
         </tr>
+        <?php
+        $rows = $News->all(['sh' => 1]);
+        foreach ($rows as $row) {
+
+
+        ?>
         <tr>
-            <td></td>
-            <td></td>
+            <td><?= $row['title'] ?></td>
+            <td><?= mb_substr($row['news'],0,25) ?>...</td>
             <td></td>
         </tr>
+        <?php
+
+        }
+
+        ?>
     </table>
 </fieldset>
