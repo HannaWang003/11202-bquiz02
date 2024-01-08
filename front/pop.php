@@ -18,26 +18,40 @@
         foreach ($rows as $row) {
         ?>
             <tr>
-                <td><?= $row['title'] ?></td>
-                <td><?= mb_substr($row['news'], 0, 25) ?>...</td>
+                <td>
+                    <div class='title' data-id='<?= $row['id'] ?>'><?= $row['title'] ?></div>
+                </td>
+                <td>
+                    <div><?= mb_substr($row['news'], 0, 25) ?>...</div>
+                    <div id="p<?= $row['id'] ?>" class="pop">
+                        <pre><?= $row['news'] ?></pre>
+                    </div>
+                </td>
                 <td></td>
             </tr>
         <?php
         }
         ?>
     </table>
+    <?php
+    if ($nowpage - 1 > 0) {
+        $prev = $nowpage - 1;
+        echo "<a href='?do=pop&page=$prev'> < </a>";
+    }
+    for ($i = 1; $i <= $pages; $i++) {
+        $fontSize = ($i == $nowpage) ? 'font-size:24px' : '';
+        echo "<a href='?do=pop&page=$i' style='$fontSize'>$i</a>";
+    }
+    if ($nowpage + 1 <= $pages) {
+        $next = $nowpage + 1;
+        echo "<a href='?do=pop&page=$next'> > </a>";
+    }
+    ?>
 </fieldset>
-<?php
-if ($nowpage - 1 > 0) {
-    $prev = $nowpage - 1;
-    echo "<a href='?do=pop&page=$prev'> < </a>";
-}
-for ($i = 1; $i <= $pages; $i++) {
-    $fontSize = ($i == $nowpage) ? 'font-size:24px' : '';
-    echo "<a href='?do=pop&page=$i' style='$fontSize'>$i</a>";
-}
-if ($nowpage + 1 <= $pages) {
-    $next = $nowpage + 1;
-    echo "<a href='?do=pop&page=$next'> > </a>";
-}
-?>
+<script>
+    $('.title').hover(function() {
+        $('.pop').hide();
+        let id = $(this).data('id');
+        $('#p' + id).show();
+    })
+</script>
