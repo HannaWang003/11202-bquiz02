@@ -123,6 +123,7 @@ $Total = new DB('total');
 $User = new DB('user');
 $News = new DB('news');
 $Que = new DB('que');
+$Log = new DB('log');
 //判斷是否瀏覽過
 if (!isset($_SESSION['visited'])) {
     if ($Total->count(['date' => date("Y-m-d")])) {
