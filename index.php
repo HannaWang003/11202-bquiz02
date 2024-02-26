@@ -46,7 +46,7 @@ include_once "./api/db.php";
                             echo "歡迎," . $_SESSION['user'];
                             if ($_SESSION['user'] == 'admin') {
                         ?>
-                                <button onclick="location.href='back.php'">管理</button> |
+                                <br><button onclick="location.href='back.php'">管理</button> |
                             <?php
                             }
                             ?>
