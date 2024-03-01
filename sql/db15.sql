@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-01-08 09:18:46
+-- 產生時間： 2024-03-01 01:20:54
 -- 伺服器版本： 10.4.28-MariaDB
 -- PHP 版本： 8.2.4
 
@@ -135,7 +135,11 @@ INSERT INTO `total` (`id`, `total`, `date`) VALUES
 (1, 12, '2023-12-29'),
 (2, 1, '2023-07-29'),
 (3, 1, '2024-01-05'),
-(4, 46, '2024-01-08');
+(4, 46, '2024-01-08'),
+(5, 1, '2024-01-15'),
+(6, 7, '2024-02-23'),
+(7, 1, '2024-01-23'),
+(8, 1, '2024-02-26');
 
 -- --------------------------------------------------------
 
@@ -222,7 +226,7 @@ ALTER TABLE `que`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `total`
 --
 ALTER TABLE `total`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
